@@ -1,0 +1,27 @@
+# ================================================================
+# CHEMIN : gestion-etudiants/.gitignore
+# ================================================================
+
+# Compilation Maven
+target/
+*.class
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+# Logs
+*.log
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Variables d'environnement (mots de passe, clés secrètes)
+.env
+application-local.properties
+
+# Uploads (les photos ne doivent pas être versionnées)
+uploads/
