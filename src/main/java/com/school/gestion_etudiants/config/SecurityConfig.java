@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
-                        // ← CORRECTION : les photos sont publiques (pas besoin de token)
+                        //  les photos sont publiques
                         .requestMatchers("/api/profile/photos/**").permitAll()
                         // Tout le reste nécessite authentification
                         .anyRequest().authenticated()
