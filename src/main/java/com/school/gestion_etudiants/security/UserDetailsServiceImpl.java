@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                         "Utilisateur non trouvé avec l'email : " + email
                 ));
 
-        // Le rôle devient une autorité Spring Security
+        // Le role devient une autorité Spring Security
         // ex: Role.ADMIN → "ROLE_ADMIN"
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getEmail())

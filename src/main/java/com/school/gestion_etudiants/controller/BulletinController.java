@@ -17,7 +17,7 @@ public class BulletinController {
 
     private final BulletinService bulletinService;
 
-    // ── ADMIN : générer le bulletin d'un étudiant ─────────────────
+    // ADMIN : générer le bulletin d'un étudiant
     // POST /api/admin/bulletins/generer?etudiantId=1&anneeId=1
     @PostMapping("/admin/bulletins/generer")
     @PreAuthorize("hasAnyRole('ADMIN', 'ETUDIANT')")
@@ -29,7 +29,7 @@ public class BulletinController {
                 ApiResponse.success(response, "Bulletin généré avec succès"));
     }
 
-    // ── ADMIN : valider un bulletin ───────────────────────────────
+    // ADMIN : valider un bulletin
     // PUT /api/admin/bulletins/{id}/valider
     @PutMapping("/admin/bulletins/{id}/valider")
     @PreAuthorize("hasAnyRole('ADMIN', 'ETUDIANT')")
@@ -40,7 +40,7 @@ public class BulletinController {
                         bulletinService.valider(id), "Bulletin validé avec succès"));
     }
 
-    // ── ADMIN : invalider un bulletin ─────────────────────────────
+    // ADMIN : invalider un bulletin
     // PUT /api/admin/bulletins/{id}/invalider
     @PutMapping("/admin/bulletins/{id}/invalider")
     @PreAuthorize("hasAnyRole('ADMIN', 'ETUDIANT')")
@@ -51,7 +51,7 @@ public class BulletinController {
                         bulletinService.invalider(id), "Bulletin invalidé"));
     }
 
-    // ── ADMIN : tous les bulletins d'une année ────────────────────
+    // ADMIN : tous les bulletins d'une année
     // GET /api/admin/bulletins?anneeId=1
     @GetMapping("/admin/bulletins")
     @PreAuthorize("hasAnyRole('ADMIN', 'ETUDIANT')")
@@ -62,7 +62,7 @@ public class BulletinController {
                 ApiResponse.success(liste, liste.size() + " bulletin(s) trouvé(s)"));
     }
 
-    // ── ADMIN & ETUDIANT : consulter un bulletin ──────────────────
+    // ADMIN & ETUDIANT : consulter un bulletin
     // GET /api/etudiant/bulletins?etudiantId=1&anneeId=1
     @GetMapping("/etudiant/bulletins")
     @PreAuthorize("hasAnyRole('ADMIN','ETUDIANT')")
@@ -73,7 +73,7 @@ public class BulletinController {
         return ResponseEntity.ok(ApiResponse.success(response, "Bulletin chargé"));
     }
 
-    // ── ADMIN & ETUDIANT : tous les bulletins d'un étudiant ───────
+    // ADMIN & ETUDIANT : tous les bulletins d'un étudiant
     // GET /api/etudiant/bulletins/historique?etudiantId=1
     @GetMapping("/etudiant/bulletins/historique")
     @PreAuthorize("hasAnyRole('ADMIN','ETUDIANT')")

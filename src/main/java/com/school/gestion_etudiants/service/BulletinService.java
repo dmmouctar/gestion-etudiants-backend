@@ -146,7 +146,7 @@ public class BulletinService {
     }
 
     // ── Consulter un bulletin ─────────────────────────────────────
-    @Transactional  // ← CORRECTION : session ouverte pendant le mapping
+    @Transactional
     public BulletinResponse consulter(Long etudiantId, Long anneeAcademiqueId) {
         Bulletin bulletin = bulletinRepository
                 .findWithDetailsByEtudiantAndAnnee(etudiantId, anneeAcademiqueId)
@@ -172,7 +172,7 @@ public class BulletinService {
     }
 
     // ── Tous les bulletins d'une année ────────────────────────────
-    @Transactional  // ← CORRECTION
+    @Transactional
     public List<BulletinResponse> listerParAnnee(Long anneeId) {
         return bulletinRepository.findByAnneeAcademiqueId(anneeId)
                 .stream()

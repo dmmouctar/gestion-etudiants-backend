@@ -15,7 +15,7 @@ public class MoyenneMatiereResponse {
     private String matiereNom;
     private Double coefficient;
     private Double moyenne;
-    // Moyenne pondérée = moyenne * coefficient (utile pour l'affichage)
+    // Moyenne pondérée = moyenne * coefficient
     private Double moyennePonderee;
     // Mention calculée par la logique métier
     private String mention;

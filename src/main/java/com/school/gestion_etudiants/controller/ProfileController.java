@@ -34,7 +34,7 @@ public class ProfileController {
     @Value("${app.upload.dir}")
     private String uploadDir;
 
-    // ── GET /api/profile/me ───────────────────────────────────────
+    // ── GET /api/profile/me ────────────────────────
     // Retourne les infos de l'utilisateur connecté + photoUrl
     @GetMapping("/me")
     @PreAuthorize("hasAnyRole('ADMIN','ETUDIANT')")
@@ -55,7 +55,7 @@ public class ProfileController {
         return ResponseEntity.ok(ApiResponse.success(data, "Profil chargé"));
     }
 
-    // ── POST /api/profile/photo ───────────────────────────────────
+    // ── POST /api/profile/photo ─────────────────────────
     // Upload d'une photo de profil
     @PostMapping("/photo")
     @PreAuthorize("hasAnyRole('ADMIN','ETUDIANT')")
@@ -109,7 +109,7 @@ public class ProfileController {
         return ResponseEntity.ok(ApiResponse.success(result, "Photo mise à jour avec succès"));
     }
 
-    // ── GET /api/profile/photos/{filename} ───────────────────────
+    // ── GET /api/profile/photos/{filename} ──────────
     // Servir les photos stockées
     @GetMapping("/photos/{filename}")
     public ResponseEntity<Resource> servePhoto(@PathVariable String filename) {

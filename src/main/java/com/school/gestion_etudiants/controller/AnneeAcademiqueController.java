@@ -17,7 +17,7 @@ public class AnneeAcademiqueController {
 
     private final AnneeAcademiqueRepository anneeRepository;
 
-    // ── Route ADMIN : gestion complète ───────────────────────────
+    // Route ADMIN : gestion complète
     // POST /api/admin/annees
     @PostMapping("/api/admin/annees")
     @PreAuthorize("hasRole('ADMIN')")
@@ -72,7 +72,7 @@ public class AnneeAcademiqueController {
         return ResponseEntity.ok(ApiResponse.success("Année supprimée"));
     }
 
-    // ── Route COMMUNE : accessible par ADMIN et ETUDIANT ─────────
+    // Route COMMUNE : accessible par ADMIN et ETUDIANT
     // GET /api/annees  ← nouvelle route sans "admin"
     @GetMapping("/api/annees")
     @PreAuthorize("hasAnyRole('ADMIN','ETUDIANT')")

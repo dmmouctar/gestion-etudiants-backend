@@ -111,14 +111,14 @@ public class EntityMapper {
     }
 
     // ============================================================
-    // BULLETIN COMPLET — correction du type List
+    // BULLETIN COMPLET
     // ============================================================
     public BulletinResponse toBulletinResponse(Bulletin b) {
         if (b == null) return null;
 
         Etudiant et = b.getEtudiant();
 
-        // ← CORRECTION : type explicite List<MoyenneMatiereResponse>
+        // type explicite List<MoyenneMatiereResponse>
         List<MoyenneMatiereResponse> moyennes;
         if (b.getMoyennesMatieres() == null || b.getMoyennesMatieres().isEmpty()) {
             moyennes = new ArrayList<>();

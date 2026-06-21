@@ -181,7 +181,7 @@ public class EtudiantService {
                 .collect(Collectors.toList());
     }
 
-    // ── Filtrer par filière ET année ──────────────────────────────
+    // ── Filtrer par filière et année ──────────────────────────────
     @Transactional
     public List<EtudiantResponse> listerParFiliereEtAnnee(Long filiereId, Long anneeId) {
         return etudiantRepository.findByFiliereIdAndAnneeAcademiqueId(filiereId, anneeId)

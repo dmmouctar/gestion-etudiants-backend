@@ -31,7 +31,7 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
             @Param("etudiantId") Long etudiantId,
             @Param("matiereId") Long matiereId);
 
-    // Moyenne d'un étudiant pour une matière (calcul SQL direct)
+    // Moyenne d'un étudiant pour une matière
     @Query("SELECT AVG(n.valeur) FROM Note n " +
             "JOIN n.examen ex " +
             "WHERE n.etudiant.id = :etudiantId " +

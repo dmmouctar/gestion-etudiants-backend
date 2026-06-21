@@ -18,7 +18,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // ── Erreurs de validation (@Valid) ────────────────────────────
+    // ── Erreurs de validation (@Valid) ──────
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<Void>> handleValidation(
             MethodArgumentNotValidException ex) {
@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
                 .body(ApiResponse.error("Données invalides", errors));
     }
 
-    // ── Mauvais email ou mot de passe ─────────────────────────────
+    // ── Mauvais email ou mot de passe ────────────
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ApiResponse<Void>> handleBadCredentials(
             BadCredentialsException ex) {
@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
                 .body(ApiResponse.error("Email ou mot de passe incorrect"));
     }
 
-    // ── Accès refusé (mauvais rôle) ───────────────────────────────
+    // ── Accès refusé (mauvais rôle) ───────────────
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ApiResponse<Void>> handleAccessDenied(
             AccessDeniedException ex) {
@@ -48,7 +48,7 @@ public class GlobalExceptionHandler {
                 .body(ApiResponse.error("Accès refusé : permissions insuffisantes"));
     }
 
-    // ── Token JWT expiré ──────────────────────────────────────────
+    // ── Token JWT expiré ───────────────────────
     @ExceptionHandler(ExpiredJwtException.class)
     public ResponseEntity<ApiResponse<Void>> handleExpiredJwt(
             ExpiredJwtException ex) {
@@ -56,7 +56,7 @@ public class GlobalExceptionHandler {
                 .body(ApiResponse.error("Token expiré, veuillez vous reconnecter"));
     }
 
-    // ── Token JWT malformé ────────────────────────────────────────
+    // ── Token JWT malformé ───────────────────
     @ExceptionHandler(MalformedJwtException.class)
     public ResponseEntity<ApiResponse<Void>> handleMalformedJwt(
             MalformedJwtException ex) {

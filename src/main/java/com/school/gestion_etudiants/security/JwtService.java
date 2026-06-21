@@ -32,7 +32,7 @@ public class JwtService {
         return buildToken(extraClaims, user.getEmail(), jwtExpiration);
     }
 
-    // ── Extraire l'email (subject) du token ──────────────────────
+    // ── Extraire l'email du token ──────────────────────
     public String extractEmail(String token) {
         return extractClaim(token, Claims::getSubject);
     }

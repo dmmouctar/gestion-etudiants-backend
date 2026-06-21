@@ -23,7 +23,7 @@ public interface EtudiantRepository extends JpaRepository<Etudiant, Long>,
     // Vérifier si un email existe déjà
     boolean existsByEmail(String email);
 
-    // ← CORRECTION : méthode simplifiée qui évite le nom trop long
+    // méthode simplifiée qui évite le nom trop long
     @Query("SELECT e FROM Etudiant e WHERE " +
             "LOWER(e.nom) LIKE LOWER(CONCAT('%', :terme, '%')) OR " +
             "LOWER(e.prenom) LIKE LOWER(CONCAT('%', :terme, '%'))")

@@ -57,9 +57,9 @@ public class EtudiantController {
                 ApiResponse.success("Étudiant supprimé avec succès"));
     }
 
-    // ── ADMIN : liste tous les étudiants avec filtres ─────────────
+    // ── ADMIN : liste tous les étudiants avec filtres ──
     // GET /api/admin/etudiants
-    // GET /api/admin/etudiants?recherche=Mohamed
+    // GET /api/admin/etudiants?recherche=Mouctar
     // GET /api/admin/etudiants?filiereId=1
     // GET /api/admin/etudiants?anneeId=1
     // GET /api/admin/etudiants?filiereId=1&anneeId=1
@@ -88,7 +88,7 @@ public class EtudiantController {
                 ApiResponse.success(liste, liste.size() + " étudiant(s) trouvé(s)"));
     }
 
-    // ── ADMIN : trouver un étudiant par ID ────────────────────────
+    // ── ADMIN : trouver un étudiant par ID ───
     // GET /api/admin/etudiants/{id}
     @GetMapping("/admin/etudiants/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'ETUDIANT')")
@@ -98,15 +98,14 @@ public class EtudiantController {
                 ApiResponse.success(etudiantService.trouverParId(id), "Étudiant trouvé"));
     }
 
-    // ── ETUDIANT : consulter son propre profil ────────────────────
+    // ── ETUDIANT : consulter son propre profil ────
     // GET /api/etudiant/profil
-    // ← On récupère l'email depuis le token JWT, puis le user, puis l'étudiant
     @GetMapping("/etudiant/profil")
     @PreAuthorize("hasAnyRole('ADMIN','ETUDIANT')")
     public ResponseEntity<ApiResponse<EtudiantResponse>> monProfil(
             Authentication authentication) {
 
-        // authentication.getName() retourne l'email (le "subject" du token JWT)
+        // authentication.getName() retourne l'email
         String email = authentication.getName();
 
         User user = userRepository.findByEmail(email)
