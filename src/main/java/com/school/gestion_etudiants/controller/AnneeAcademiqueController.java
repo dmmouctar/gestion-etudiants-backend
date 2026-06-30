@@ -12,15 +12,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/admin/annees")
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('ADMIN')")
 public class AnneeAcademiqueController {
 
     private final AnneeAcademiqueRepository anneeRepository;
 
-    // Route ADMIN : gestion complète
-    // POST /api/admin/annees
-    @PostMapping("/api/admin/annees")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping
     public ResponseEntity<ApiResponse<AnneeAcademique>> creer(
             @RequestBody AnneeAcademique annee) {
         if (anneeRepository.existsByNom(annee.getNom())) {
@@ -32,26 +31,21 @@ public class AnneeAcademiqueController {
                 .body(ApiResponse.success(saved, "Année académique créée avec succès"));
     }
 
-    // GET /api/admin/annees (admin)
-    @GetMapping("/api/admin/annees")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponse<List<AnneeAcademique>>> listerAdmin() {
+    @GetMapping
+    public ResponseEntity<ApiResponse<List<AnneeAcademique>>> lister() {
         List<AnneeAcademique> liste = anneeRepository.findAll();
-        return ResponseEntity.ok(ApiResponse.success(liste, liste.size() + " année(s)"));
+        return ResponseEntity.ok(
+                ApiResponse.success(liste, liste.size() + " année(s)"));
     }
 
-    // GET /api/admin/annees/{id}
-    @GetMapping("/api/admin/annees/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<AnneeAcademique>> trouver(@PathVariable Long id) {
         AnneeAcademique annee = anneeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Année non trouvée"));
         return ResponseEntity.ok(ApiResponse.success(annee, "Année trouvée"));
     }
 
-    // PUT /api/admin/annees/{id}
-    @PutMapping("/api/admin/annees/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<AnneeAcademique>> modifier(
             @PathVariable Long id, @RequestBody AnneeAcademique request) {
         AnneeAcademique annee = anneeRepository.findById(id)
@@ -62,22 +56,12 @@ public class AnneeAcademiqueController {
                 ApiResponse.success(anneeRepository.save(annee), "Année modifiée"));
     }
 
-    // DELETE /api/admin/annees/{id}
-    @DeleteMapping("/api/admin/annees/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> supprimer(@PathVariable Long id) {
-        if (!anneeRepository.existsById(id))
+        if (!anneeRepository.existsById(id)) {
             throw new RuntimeException("Année non trouvée");
+        }
         anneeRepository.deleteById(id);
         return ResponseEntity.ok(ApiResponse.success("Année supprimée"));
-    }
-
-    // Route COMMUNE : accessible par ADMIN et ETUDIANT
-    // GET /api/annees  ← nouvelle route sans "admin"
-    @GetMapping("/api/annees")
-    @PreAuthorize("hasAnyRole('ADMIN','ETUDIANT')")
-    public ResponseEntity<ApiResponse<List<AnneeAcademique>>> listerTous() {
-        List<AnneeAcademique> liste = anneeRepository.findAll();
-        return ResponseEntity.ok(ApiResponse.success(liste, liste.size() + " année(s)"));
     }
 }

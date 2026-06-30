@@ -47,6 +47,7 @@ public class MatiereController {
         return ResponseEntity.ok(ApiResponse.success("Matière supprimée avec succès"));
     }
 
+
     // GET /api/admin/matieres
     @GetMapping
     public ResponseEntity<ApiResponse<List<MatiereResponse>>> listerTous(
@@ -56,6 +57,8 @@ public class MatiereController {
                 : matiereService.listerTous();
         return ResponseEntity.ok(ApiResponse.success(liste, liste.size() + " matière(s)"));
     }
+
+
 
     // GET /api/admin/matieres/{id}
     @GetMapping("/{id}")

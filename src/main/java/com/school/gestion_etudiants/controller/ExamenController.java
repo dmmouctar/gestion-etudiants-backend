@@ -47,6 +47,7 @@ public class ExamenController {
         return ResponseEntity.ok(ApiResponse.success("Examen supprimé avec succès"));
     }
 
+
     // GET /api/admin/examens
     @GetMapping
     public ResponseEntity<ApiResponse<List<ExamenResponse>>> listerTous(
@@ -56,6 +57,8 @@ public class ExamenController {
                 : examenService.listerTous();
         return ResponseEntity.ok(ApiResponse.success(liste, liste.size() + " examen(s)"));
     }
+
+
 
     // GET /api/admin/examens/{id}
     @GetMapping("/{id}")
